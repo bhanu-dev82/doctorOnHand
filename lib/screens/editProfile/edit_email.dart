@@ -1,12 +1,10 @@
 import 'package:doctorppp/screens/editProfile/profile_page.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
 import '../../validatorsAuth/Validator.dart' as validator;
 import '../../globals.dart';
 import '../../validatorsAuth/auth.dart';
 import 'appbar_widget.dart';
-import 'package:email_validator/email_validator.dart';
 import '../../persistance/userCrud.dart' as crud;
 
 // This class handles the Page to edit the Email Section of the User Profile.
@@ -23,7 +21,7 @@ class EditEmailFormPage extends StatefulWidget {
 class EditEmailFormPageState extends State<EditEmailFormPage> {
   final _formKey = GlobalKey<FormState>();
   final emailController = TextEditingController();
- // var user = UserData.myUser;
+  // var user = UserData.myUser;
 
   @override
   void dispose() {
@@ -32,9 +30,8 @@ class EditEmailFormPageState extends State<EditEmailFormPage> {
   }
 
   Future<void> updateUserValue(String email) async {
-    await crud.updateUser(auth.currentUser!.uid, {"email":email});
+    await crud.updateUser(auth.currentUser!.uid, {"email": email});
     await widget.authController.fetchUserInfo();
-
   }
 
   @override
@@ -47,28 +44,29 @@ class EditEmailFormPageState extends State<EditEmailFormPage> {
               crossAxisAlignment: CrossAxisAlignment.center,
               mainAxisAlignment: MainAxisAlignment.start,
               children: <Widget>[
-                SizedBox(
+                const SizedBox(
                     width: 320,
-                    child: const Text(
+                    child: Text(
                       "What's your email?",
                       style:
                           TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
                       textAlign: TextAlign.left,
                     )),
                 Padding(
-                    padding: EdgeInsets.only(top: 40),
+                    padding: const EdgeInsets.only(top: 40),
                     child: SizedBox(
                         height: 100,
                         width: 320,
                         child: TextFormField(
                           // Handles Form Validation
-                          validator: (email)=>validator.emailValidatro(email!),
+                          validator: (email) =>
+                              validator.emailValidatro(email!),
                           decoration: const InputDecoration(
                               labelText: 'Your email address'),
                           controller: emailController,
                         ))),
                 Padding(
-                    padding: EdgeInsets.only(top: 10),
+                    padding: const EdgeInsets.only(top: 10),
                     child: Align(
                         alignment: Alignment.bottomCenter,
                         child: SizedBox(

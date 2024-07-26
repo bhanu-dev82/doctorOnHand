@@ -10,7 +10,6 @@ import 'model.dart';
 import 'card.dart';
 
 class CompletedVisitsController extends GetxController {
-
   final doctorHomePageController = Get.find<DoctorHomePageController>();
   var visits = <BookingService>[].obs;
   final _prefs = SharedPreferences.getInstance();
@@ -18,24 +17,24 @@ class CompletedVisitsController extends GetxController {
   @override
   void onInit() async {
     super.onInit();
-     print("dezfezfezfezf${doctorHomePageController.allDoctrorMeetings.value.length}");
-     visits.value= await doctorHomePageController.getPassedMeetings(doctorHomePageController.allDoctrorMeetings.value, DateTime.now());
-     print("fjksoqjfoqfq${visits.value.length}");
+    print(
+        "dezfezfezfezf${doctorHomePageController.allDoctrorMeetings.value.length}");
+    visits.value = doctorHomePageController.getPassedMeetings(
+        doctorHomePageController.allDoctrorMeetings.value, DateTime.now());
+    print("fjksoqjfoqfq${visits.value.length}");
   }
-
 
   Future<void> clearCompletedVisits() async {
     visits.clear();
     final prefs = await _prefs;
-   // prefs.remove('visits');
+    // prefs.remove('visits');
     update();
   }
 
   void addCompletedVisit(Visit visit) async {
     // Check if the visit is a duplicate
     bool isDuplicate = visits.any((v) =>
-    v.userName == visit.patientName &&
-        v.bookingStart == visit.visitDate);
+        v.userName == visit.patientName && v.bookingStart == visit.visitDate);
 
     if (isDuplicate) {
       // Display an error message and return without adding the visit
@@ -53,7 +52,6 @@ class CompletedVisitsController extends GetxController {
     prefs.setString('visits', visitsJson);
     update();
   }
-
 
 // void addCompletedVisit(Visit visit) async {
   //     // Check if the visit is a duplicate
@@ -77,14 +75,13 @@ class CompletedVisitsController extends GetxController {
   //   prefs.setString('visits', visitsJson);
   //   update();
   // }
-
-
 }
 
-
-
 class CompletedVisitsScreen extends StatelessWidget {
-  final CompletedVisitsController completedVisitsController = Get.find<CompletedVisitsController>();
+  final CompletedVisitsController completedVisitsController =
+      Get.find<CompletedVisitsController>();
+
+  CompletedVisitsScreen({super.key});
   //
   // void updateVisits() {
   //   controller.update();
@@ -94,35 +91,34 @@ class CompletedVisitsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Completed Visits'),
+        title: const Text('Completed Visits'),
         flexibleSpace: Container(
           decoration: const BoxDecoration(
               gradient: LinearGradient(
-                begin: Alignment.topRight,
-                end: Alignment.bottomLeft,
-                stops: [
-                  0.1,
-                  0.6,
-                ],
-                colors: [
-                  Colors.blue,
-                  Colors.teal,
-                ],
-              )),
+            begin: Alignment.topRight,
+            end: Alignment.bottomLeft,
+            stops: [
+              0.1,
+              0.6,
+            ],
+            colors: [
+              Colors.blue,
+              Colors.teal,
+            ],
+          )),
         ),
-
         actions: [
           IconButton(
             icon: const Icon(Icons.delete // Icons.add;
-    ),
+                ),
             onPressed: () {
-             completedVisitsController.clearCompletedVisits();
+              completedVisitsController.clearCompletedVisits();
             },
           ),
         ],
       ),
       body: GetBuilder<CompletedVisitsController>(
-       // init: controller,
+        // init: controller,
         builder: (controller) => ListView.builder(
           itemCount: controller.visits.value.length,
           itemBuilder: (context, index) {

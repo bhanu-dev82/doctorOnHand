@@ -46,11 +46,6 @@ class AppointmentController extends GetxController {
   //   ),
   //   // Add more appointments here
   // ].obs;
-  @override
-  void onInit() {
-    super.onInit();
-    //_loadAppointments();
-  }
 
   // Future<void> _loadAppointments() async {
   //   final prefs = await SharedPreferences.getInstance();
@@ -84,11 +79,13 @@ class AppointmentScreen extends StatelessWidget {
 
   final doctorHomePageController = Get.find<DoctorHomePageController>();
 
+  AppointmentScreen({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Upcoming Appointments"),
+        title: const Text("Upcoming Appointments"),
         flexibleSpace: Container(
           decoration: const BoxDecoration(
               gradient: LinearGradient(
@@ -117,13 +114,12 @@ class AppointmentScreen extends StatelessWidget {
               return AppointmentCard(
                 appointment: upComingApp[index],
                 onPressed: () {
-                  String patientId =
-                      doctorHomePageController.allDoctrorMeetings.value[index]
-                          .userName!;
-                  Get.to(
-                    VideoCallScreen(doctorId: authController.userData.value.fName+authController.userData.value.lName,
-                        patientId: patientId)
-                  );
+                  String patientId = doctorHomePageController
+                      .allDoctrorMeetings.value[index].userName!;
+                  Get.to(VideoCallScreen(
+                      doctorId: authController.userData.value.fName +
+                          authController.userData.value.lName,
+                      patientId: patientId));
                   // )?.then((value) {
                   //   if (value == true) {
                   //     appointmentController

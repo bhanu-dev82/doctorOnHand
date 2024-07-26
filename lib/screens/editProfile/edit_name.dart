@@ -2,7 +2,6 @@ import 'package:doctorppp/globals.dart';
 import 'package:doctorppp/screens/editProfile/profile_page.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
 import 'package:string_validator/string_validator.dart';
 import '../../validatorsAuth/auth.dart';
 import 'appbar_widget.dart';
@@ -13,7 +12,6 @@ class EditNameFormPage extends StatefulWidget {
   EditNameFormPage({Key? key}) : super(key: key);
   final authController = Get.find<AuthController>();
   @override
-
   EditNameFormPageState createState() {
     return EditNameFormPageState();
   }
@@ -31,10 +29,10 @@ class EditNameFormPageState extends State<EditNameFormPage> {
     super.dispose();
   }
 
-    Future<void> updateUserValue(String fName, String lName) async {
-    await crud.updateUser(auth.currentUser!.uid, {"fName":fName,"lName":lName});
+  Future<void> updateUserValue(String fName, String lName) async {
+    await crud
+        .updateUser(auth.currentUser!.uid, {"fName": fName, "lName": lName});
     await widget.authController.fetchUserInfo();
-
   }
 
   @override
@@ -47,9 +45,9 @@ class EditNameFormPageState extends State<EditNameFormPage> {
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisAlignment: MainAxisAlignment.start,
             children: <Widget>[
-              SizedBox(
+              const SizedBox(
                   width: 330,
-                  child: const Text(
+                  child: Text(
                     "What's Your Name?",
                     style: TextStyle(
                       fontSize: 25,
@@ -61,7 +59,7 @@ class EditNameFormPageState extends State<EditNameFormPage> {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Padding(
-                      padding: EdgeInsets.fromLTRB(0, 40, 16, 0),
+                      padding: const EdgeInsets.fromLTRB(0, 40, 16, 0),
                       child: SizedBox(
                           height: 100,
                           width: 150,
@@ -76,11 +74,11 @@ class EditNameFormPageState extends State<EditNameFormPage> {
                               return null;
                             },
                             decoration:
-                                InputDecoration(labelText: 'First Name'),
+                                const InputDecoration(labelText: 'First Name'),
                             controller: firstNameController,
                           ))),
                   Padding(
-                      padding: EdgeInsets.fromLTRB(0, 40, 16, 0),
+                      padding: const EdgeInsets.fromLTRB(0, 40, 16, 0),
                       child: SizedBox(
                           height: 100,
                           width: 150,
@@ -101,7 +99,7 @@ class EditNameFormPageState extends State<EditNameFormPage> {
                 ],
               ),
               Padding(
-                  padding: EdgeInsets.only(top: 10),
+                  padding: const EdgeInsets.only(top: 10),
                   child: Align(
                       alignment: Alignment.bottomCenter,
                       child: SizedBox(
@@ -113,8 +111,9 @@ class EditNameFormPageState extends State<EditNameFormPage> {
                             if (_formKey.currentState!.validate() &&
                                 isAlpha(firstNameController.text +
                                     secondNameController.text)) {
-                              await updateUserValue(firstNameController.text,secondNameController.text).then((value) =>  Get.to(ProfilePage()));
-                              
+                              await updateUserValue(firstNameController.text,
+                                      secondNameController.text)
+                                  .then((value) => Get.to(ProfilePage()));
                             }
                           },
                           child: const Text(

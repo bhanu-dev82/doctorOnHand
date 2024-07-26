@@ -1,19 +1,12 @@
-import 'dart:ui';
-
 import 'package:doctorppp/screens/appointments/upcoming.dart';
 import 'package:doctorppp/screens/history/view.dart';
 
-import 'package:doctorppp/screens/search/view.dart';
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
 
-import 'package:ionicons/ionicons.dart';
 import '../../Controllers/clinicController.dart';
 import '../../validatorsAuth/auth.dart';
 import '../../widgets/incoming_appointments.dart';
-import 'homepage.dart';
 
 class HomeInfo extends StatelessWidget {
   HomeInfo({
@@ -41,7 +34,7 @@ class HomeInfo extends StatelessWidget {
                     "Hi ${authController.userData.value.fName}!",
 
                     //   "\nHow are you today?",
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontFamily: "Roboto",
                       fontWeight: FontWeight.bold,
                       fontSize: 30,
@@ -84,7 +77,8 @@ class HomeInfo extends StatelessWidget {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                builder: (context) => PatientAppointmentScreen(),
+                                builder: (context) =>
+                                    PatientAppointmentScreen(),
                               ),
                             );
                           },
@@ -120,7 +114,8 @@ class HomeInfo extends StatelessWidget {
                                           padding: const EdgeInsets.fromLTRB(
                                               0, 0, 0, 20),
                                           child: ClipRRect(
-                                            borderRadius: BorderRadius.circular(10),
+                                            borderRadius:
+                                                BorderRadius.circular(10),
                                             child: const Icon(
                                               Icons.update,
                                               size: 75,
@@ -130,7 +125,8 @@ class HomeInfo extends StatelessWidget {
                                           ),
                                         ),
                                         const Padding(
-                                          padding: EdgeInsets.fromLTRB(8, 0, 8, 0),
+                                          padding:
+                                              EdgeInsets.fromLTRB(8, 0, 8, 0),
                                           child: Text(
                                             "Appointments",
                                             style: TextStyle(
@@ -295,7 +291,6 @@ class HomeInfo extends StatelessWidget {
                     //     ),
                     //   ),
                     // ),
-
                   ],
                 ),
 

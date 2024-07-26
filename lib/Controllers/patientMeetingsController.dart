@@ -39,9 +39,9 @@ class PatientMeetingsController extends GetxController {
   }
 
   void _initializeNotifications() {
-    final AndroidInitializationSettings initializationSettingsAndroid =
+    const AndroidInitializationSettings initializationSettingsAndroid =
         AndroidInitializationSettings('app_icon');
-    final InitializationSettings initializationSettings =
+    const InitializationSettings initializationSettings =
         InitializationSettings(android: initializationSettingsAndroid);
     flutterLocalNotificationsPlugin.initialize(initializationSettings);
   }
@@ -100,6 +100,7 @@ class PatientMeetingsController extends GetxController {
         .then((value) => earliestdoctor.value = value!);
     print(earliestdoctor.value.fName);
     update();
+    return null;
   }
 
   List<BookingServiceWrapper> getUpcomingMeetings(
@@ -145,12 +146,12 @@ class PatientMeetingsController extends GetxController {
         getDoctorData(meeting); // Fetch doctor data for the current meeting
 
         final DateTime oneWeekBefore =
-            meeting.bookingStart.subtract(Duration(days: 7));
+            meeting.bookingStart.subtract(const Duration(days: 7));
         final DateTime thirtySixHoursBefore =
-            meeting.bookingStart.subtract(Duration(hours: 36));
+            meeting.bookingStart.subtract(const Duration(hours: 36));
         print(thirtySixHoursBefore.toString());
         final DateTime oneHourBefore =
-            meeting.bookingStart.subtract(Duration(hours: 1));
+            meeting.bookingStart.subtract(const Duration(hours: 1));
 
         scheduleNotification(
             oneWeekBefore,
